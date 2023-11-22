@@ -45,6 +45,10 @@ main{
     background-color: rgb(58, 58, 156);
 }
 
+.bomb{
+    background-color: brown;
+}
+
 #game-section{
     width: 800px;
     height: 800px;

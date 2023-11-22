@@ -21,43 +21,68 @@ buttonElement.append('Play')
 // Main content
 const gameSection = document.getElementById('game-section')
 const wrapper = gameSection.classList.add('wrapper')
+const bombsArr = []
+
 
 
 buttonElement.addEventListener('click',function(){
     gameSection.innerHTML = '';
     createBox();
+    clearBombs();
+    getBombs();
+    // Bombs array
+    // while (bombsArr.length < 16){
+    //     const randomNumber = getRandomNumber ()
+
+    //     // if(bombsArr.indexOf(randomNumber) === -1) bombsArr.push(randomNumber);       
+    //     if(!bombsArr.includes(randomNumber)){
+    //         bombsArr.push(randomNumber)
+    //     }
+    // }
+    // console.log(bombsArr)
+    console.log(bombsArr)
+
 });
+
 // chiedere a Riccardo perchè se su console log scrivo i mi esce il numero complessivo dei box
 
-function createBox(){
 
+//--FUNCTIONS--
+function createBox(){
     for(let i = 1; i <= 100; i++){
         const divElement = document.createElement('div')
         divElement.classList.add('box')
-        divElement.append(i)
-
+        const cellNumber = i
+        divElement.append(cellNumber)
+        
         divElement.addEventListener('click', function(){
-            divElement.classList.toggle('clicked-box')
-            console.log(divElement.innerHTML)
+            if(bombsArr.includes(cellNumber)){
+                divElement.classList.add('bomb')
+            }else {
+                divElement.classList.add('clicked-box')
+            }
         })
         gameSection.appendChild(divElement)
 
 }}
 
-const bombsArr = []
-
-while (bombsArr.length < 16){
-    const randomNumber = getRandomNumber ()
-    // if(bombsArr.indexOf(randomNumber) === -1) bombsArr.push(randomNumber); Possible solution found on stack-overflow
-    if(bombsArr.includes(randomNumber)){
-        getRandomNumber()
-    }
-    bombsArr.push(randomNumber)
-}
-
-
-
 function getRandomNumber(){
     return Math.floor(Math.random() * (100 - 1 + 1));
+}
+
+function getBombs(){
+    while (bombsArr.length < 16){
+        const randomNumber = getRandomNumber ()
+    
+        // if(bombsArr.indexOf(randomNumber) === -1) bombsArr.push(randomNumber);       
+        if(!bombsArr.includes(randomNumber)){
+            bombsArr.push(randomNumber)
+        }
+    } 
+}
+function clearBombs(){
+    while(bombsArr.length > 0){
+        bombsArr.pop()
     }
-    console.log(bombsArr)
+    return bombsArr
+}
